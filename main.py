@@ -35,81 +35,84 @@ class Pokemon:
         time.sleep(2)
 
         # Check if there is an advantage!
+        attack_1 = ""
+        attack_2 = ""
         types = ['Fire', 'Water', 'Grass']
         for i, ele in enumerate(types):
-            # Both are the same type
-            if self.types == pokemon2.types:
-                attack_1 = 'Its not very effective...'
-                attack_2 = 'Its not very effective...'
-            # First pokemon has an advantage
-            if self.types == types[(i + 1) % 3]:
-                self.attack *= 1.5
-                self.defense *= 1.5
-                pokemon2.attack /= 1.5
-                pokemon2.defense /= 1.5
-                attack_1 = 'Its super effective!'
-                attack_2 = 'Its not very effective...'
-            # First pokemon has a disadvantage
-            if self.types == types[(i + 2) % 3]:
-                pokemon2.attack *= 1.5
-                pokemon2.defense *= 1.5
-                self.attack /= 1.5
-                self.defense /= 1.5
-                attack_1 = 'Its not very effective...'
-                attack_2 = 'Its super effective!'
+            if self.types == ele:
+                # Both are the same type
+                if pokemon2.types == ele:
+                    attack_1 = 'Its not very effective...'
+                    attack_2 = 'Its not very effective...'
+                # Second pokemon has an advantage
+                if pokemon2.types == types[(i + 1) % 3]:
+                    pokemon2.attack *= 1.5
+                    pokemon2.defense *= 1.5
+                    self.attack /= 1.5
+                    self.defense /= 1.5
+                    attack_1 = 'Its not very effective...'
+                    attack_2 = 'Its super effective!'
+                # First pokemon has an advantage
+                if pokemon2.types == types[(i + 2) % 3]:
+                    self.attack *= 1.5
+                    self.defense *= 1.5
+                    pokemon2.attack /= 1.5
+                    pokemon2.defense /= 1.5
+                    attack_1 = 'Its super effective!'
+                    attack_2 = 'Its not very effective...'
 
-            while (self.hearts > 0 and pokemon2.hearts > 0):
-                print(f'{self.name}\t\t HEALTH\t{self.health_bar}')
-                print(f'{pokemon2.name}\t\t HEALTH\t{pokemon2.health_bar}\n')
+        while( self.hearts > 0 and pokemon2.hearts > 0 ):
+            print(f'{self.name}\t\t HEALTH\t{self.health_bar}')
+            print(f'{pokemon2.name}\t\t HEALTH\t{pokemon2.health_bar}\n')
 
-                print(f'GO {self.name}!')
-                for i, ele in enumerate(self.moves):
-                    print(f'{i + 1})', ele)
-                index = int(input('Pick a move: '))
-                imprimir_lento(f'{self.name} used {self.moves[index-1]}!\n')
-                time.sleep(1)
-                imprimir_lento(attack_1)
+            print(f'GO {self.name}!')
+            for i, ele in enumerate(self.moves):
+                print(f'{i + 1})', ele)
+            index = int(input('Pick a move: '))
+            imprimir_lento(f'{self.name} used {self.moves[index-1]}!\n')
+            time.sleep(1)
+            imprimir_lento(attack_1)
 
-                pokemon2.hearts -= self.attack
-                pokemon2.health_points = ""
+            pokemon2.hearts -= self.attack
+            pokemon2.health_bar = ""
 
-                for j in range (int(pokemon2.hearts+.1*pokemon2.defense)):
-                    pokemon2.health_bar += "="
+            for j in range(int(pokemon2.hearts+.1*pokemon2.defense)):
+                pokemon2.health_bar += "="
 
-                time.sleep(1)
-                print(f'\n{self.name}\t\t HEALTH\t{self.health_bar}')
-                print(f'{pokemon2.name}\t\t HEALTH\t{pokemon2.health_bar}\n')
-                time.sleep(0.5)
+            time.sleep(1)
+            print(f'\n{self.name}\t\t HEALTH\t{self.health_bar}')
+            print(f'{pokemon2.name}\t\t HEALTH\t{pokemon2.health_bar}\n')
+            time.sleep(0.5)
 
-                if pokemon2.hearts <=0:
-                    imprimir_lento('\n...' + pokemon2.name + ' fainted !')
-                    break
+            if pokemon2.hearts <=0:
+                imprimir_lento('\n...' + pokemon2.name + ' fainted !')
+                break
 
-                print(f'GO {pokemon2.name}!')
-                for i, ele in enumerate(pokemon2.moves):
-                    print(f'{i + 1})', ele)
-                index = int(input('Pick a move: '))
-                imprimir_lento(f'{pokemon2.name} used {pokemon2.moves[index - 1]}!\n')
-                time.sleep(1)
-                imprimir_lento(attack_2)
+            print(f'GO {pokemon2.name}!')
+            for i, ele in enumerate(pokemon2.moves):
+                print(f'{i + 1})', ele)
+            index = int(input('Pick a move: '))
+            imprimir_lento(f'{pokemon2.name} used {pokemon2.moves[index - 1]}!\n')
+            time.sleep(1)
+            imprimir_lento(attack_2)
 
-                self.hearts -= pokemon2.attack
-                self.health_points = ""
+            self.hearts -= pokemon2.attack
+            self.health_bar = ""
 
-                for j in range(int(self.hearts + .1 * self.defense)):
-                    self.health_bar += "="
+            for j in range(int(self.hearts + .1 * self.defense)):
+                self.health_bar += "="
 
-                time.sleep(1)
-                print(f'\n{pokemon2.name}\t\t HEALTH\t{pokemon2.health_bar}')
-                print(f'{self.name}\t\t HEALTH\t{self.health_bar}\n')
-                time.sleep(0.5)
+            time.sleep(1)
+            print(f'\n{pokemon2.name}\t\t HEALTH\t{pokemon2.health_bar}')
+            print(f'{self.name}\t\t HEALTH\t{self.health_bar}\n')
+            time.sleep(0.5)
 
-                if self.hearts <= 0:
-                    imprimir_lento('\n...' + self.name + ' fainted !')
-                    break
+            if self.hearts <= 0:
+                imprimir_lento('\n...' + self.name + ' fainted !')
+                break
 
-                money = np.random.choice(5000)
-                imprimir_lento(f'Opponent paid you ${money}.')
+            money = np.random.choice(5000)
+            imprimir_lento(f'Opponent paid you ${money}.')
 
 if __name__ == "__main__":
     Charizard = Pokemon('Charizard', 'Fire', ['Flamethrower', 'Fire Blast', 'Solar Beam', 'Dragon Pulse'], {'ATTACK': 14, 'DEFENSE': 8})
