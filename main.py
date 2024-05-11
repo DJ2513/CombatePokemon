@@ -35,8 +35,6 @@ class Pokemon:
         time.sleep(2)
 
         # Check if there is an advantage!
-        attack_1 = ""
-        attack_2 = ""
         types = ['Fire', 'Water', 'Grass']
         for i, ele in enumerate(types):
             if self.types == ele:
@@ -46,16 +44,16 @@ class Pokemon:
                     attack_2 = 'Its not very effective...'
                 # Second pokemon has an advantage
                 if pokemon2.types == types[(i + 1) % 3]:
-                    pokemon2.attack *= 1.5
-                    pokemon2.defense *= 1.5
+                    pokemon2.attack *= 2
+                    pokemon2.defense *= 2
                     self.attack /= 1.5
                     self.defense /= 1.5
                     attack_1 = 'Its not very effective...'
                     attack_2 = 'Its super effective!'
                 # First pokemon has an advantage
                 if pokemon2.types == types[(i + 2) % 3]:
-                    self.attack *= 1.5
-                    self.defense *= 1.5
+                    self.attack *= 2
+                    self.defense *= 2
                     pokemon2.attack /= 1.5
                     pokemon2.defense /= 1.5
                     attack_1 = 'Its super effective!'
@@ -85,7 +83,7 @@ class Pokemon:
             time.sleep(0.5)
 
             if pokemon2.hearts <=0:
-                imprimir_lento('\n...' + pokemon2.name + ' fainted !')
+                imprimir_lento('\n...' + pokemon2.name + ' fainted !\n')
                 break
 
             print(f'GO {pokemon2.name}!')
@@ -108,11 +106,11 @@ class Pokemon:
             time.sleep(0.5)
 
             if self.hearts <= 0:
-                imprimir_lento('\n...' + self.name + ' fainted !')
+                imprimir_lento('\n...' + self.name + ' fainted !\n')
                 break
 
-            money = np.random.choice(5000)
-            imprimir_lento(f'Opponent paid you ${money}.')
+        money = np.random.choice(5000)
+        imprimir_lento(f'Opponent paid you ${money}.')
 
 if __name__ == "__main__":
     Charizard = Pokemon('Charizard', 'Fire', ['Flamethrower', 'Fire Blast', 'Solar Beam', 'Dragon Pulse'], {'ATTACK': 14, 'DEFENSE': 8})
